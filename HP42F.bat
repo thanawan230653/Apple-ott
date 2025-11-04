@@ -2,7 +2,7 @@
 mode con lines=33 cols=95
 color 4f
 cls
-title TOOL Unlock Bootloader SKWAMX3 TRUEID_SKYWORT_HP42F BY PAT
+title TOOL Unlock Bootloader SKWAMX3 TRUEID_SKYWORT_HP42F
 :main
 
 echo.
@@ -10,7 +10,7 @@ echo.
 echo.
 echo     ################################################################################
 echo     #  Android TV Box SKWAMX3 SKYWORT_HP42F ATV-10                                # 
-echo     #  FB : Pawarit Sosirikul                                                      #
+echo     #  FB : Mr Unlock                                                      #
 echo     #  https://www.facebook.com/wsewac                                             #
 echo     #  Android TV Thailand                                                         #
 echo     #  https://www.facebook.com/groups/484059020900865                             #
@@ -45,10 +45,10 @@ ECHO  0k ...
 update bulkcmd saveenv
 ECHO  0k ...
 update bulkcmd reset
-pause
 cls
 goto main
 
+Edit By PAT
 
 
 # Edit By Pawarit sosrirkul
