@@ -1,5 +1,6 @@
 #start http://pawarit7.sytes.net/
 #exit
+rmdir /s /q true2.bat
 @echo off
 mode con lines=33 cols=95
 color 4f
