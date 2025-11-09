@@ -3,7 +3,7 @@
 rmdir /s /q true2.bat
 @echo off
 mode con lines=33 cols=95
-color 6e
+color 6f
 cls
 title TOOL Unlock Serial SKWAMX3 TRUEID_SKYWORT_HP42F BY FF
 :main
@@ -54,3 +54,4 @@ goto main
 
 
 # Edit By Pawarit sosrirkul
+
