@@ -26,7 +26,7 @@ IF %M%==3 GOTO exit
 update bulkcmd "keyman write usid str 0000000000"
 update bulkcmd "keyman write usid str 1234567890"
 update bulkcmd "keyman read usid"
-update bulkcmd "saveenv
+update bulkcmd "saveenv"
 update bulkcmd "reset"
 echo 
 goto main
@@ -38,4 +38,5 @@ fastboot oem update
 goto main
 
 # edit by pawarit
+
 
