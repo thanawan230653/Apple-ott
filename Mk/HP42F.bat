@@ -1,5 +1,5 @@
-#start http://pawarit7.sytes.net/
-#exit
+start http://pawarit7.sytes.net/
+exit
 @echo off
 mode con lines=33 cols=95
 color 4f
@@ -48,6 +48,7 @@ update bulkcmd reset
 pause
 cls
 goto main
+
 
 
 
