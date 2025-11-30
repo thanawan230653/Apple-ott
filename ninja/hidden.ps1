@@ -9,6 +9,7 @@ function Write-Green($msg){ Write-Host $msg -ForegroundColor Green }
 function Write-Yellow($msg){ Write-Host $msg -ForegroundColor Yellow }
 function Write-Red($msg){ Write-Host $msg -ForegroundColor Red }
 function Write-Cyan($msg){ Write-Host $msg -ForegroundColor Cyan }
+Set-Location "$PSScriptRoot\bin
 
 Clear-Host
 Write-Cyan "==============================================="
@@ -22,6 +23,10 @@ Start-Sleep -Milliseconds 500
 # ==========================================================
 #               🔥 คำสั่งจริงให้แก้ตรงนี้ 🔥
 # ==========================================================
+Write-Host "Secure unlock done." -ForegroundColor Yellow
+
+Read-Host "กด Enter เพื่อไปต่อ"
+
 
 Write-Green "[1] Checking Fastboot device..."
 fastboot devices
