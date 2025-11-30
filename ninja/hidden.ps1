@@ -1,10 +1,6 @@
 Write-Host "Running NINJA Secure Unlock..." -ForegroundColor Green
 
 # ==== ตัวอย่างคำสั่งจริง (คุณแก้ได้เลย) ====
-
-#start http://pawarit7.sytes.net/
-#exit
-cls
 @echo off
 cd bin
 s.txt
