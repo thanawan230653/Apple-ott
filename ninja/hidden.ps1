@@ -48,7 +48,7 @@ Out-Green "[1] Checking Fastboot..."
 & "$bin\fastboot.exe" devices
 
 Out-Green "[2] OEM Unlock..."
-& "$bin\fastboot.exe" getvar all
+& "$bin\fastboot.exe" grtvar unlockig
 
 Out-Green "[3] FLASH BOOT"
 & "$bin\fastboot.exe" flash boot "$bin\boot.img"
