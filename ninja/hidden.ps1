@@ -43,6 +43,9 @@ G "[2] OEM Unlock…"
 G "[3] Unlocking Bootloader…"
 ./fastboot.exe flashing unlock
 
+G "[4] Flash LK…"
+./fastboot.exe flash lk "lk.bin"
+
 G "[5] Flash BOOT…"
 ./fastboot.exe flash boot ./boot.img
 
