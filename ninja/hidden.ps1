@@ -1,55 +1,70 @@
 # ==========================================================
 #  Ninja Unlock – Secure Hidden Payload
-#  This script is executed remotely from unlock.bat
-#  DO NOT EXPOSE THIS FILE PUBLICLY
 # ==========================================================
 
-# ฟังก์ชันพิมพ์แบบมีสี
-function Write-Green($msg){ Write-Host $msg -ForegroundColor Green }
-function Write-Yellow($msg){ Write-Host $msg -ForegroundColor Yellow }
-function Write-Red($msg){ Write-Host $msg -ForegroundColor Red }
-function Write-Cyan($msg){ Write-Host $msg -ForegroundColor Cyan }
+# ปลดบล็อก PS Script
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+
+# ฟังก์ชันพิมพ์สี
+function Out-Green($m){Write-Host $m -ForegroundColor Green}
+function Out-Yellow($m){Write-Host $m -ForegroundColor Yellow}
+function Out-Red($m){Write-Host $m -ForegroundColor Red}
+function Out-Cyan($m){Write-Host $m -ForegroundColor Cyan}
 
 Clear-Host
-Write-Cyan "==============================================="
-Write-Cyan "        NINJA SECURE REMOTE EXECUTION"
-Write-Cyan "==============================================="
+Out-Cyan "==============================================="
+Out-Cyan "        NINJA SECURE REMOTE EXECUTION"
+Out-Cyan "==============================================="
 Write-Host ""
 
-Write-Yellow "Loading internal unlock modules..."
-Start-Sleep -Milliseconds 500
+Out-Yellow "Loading modules..."
+Start-Sleep -Milliseconds 300
 
 # ==========================================================
-#                   🔥 ย้ายมาที่โฟลเดอร์ bin 🔥
+#  ย้ายไป bin แบบปลอดภัย
 # ==========================================================
-Set-Location "$PSScriptRoot\bin"
+$bin = "$PSScriptRoot\bin"
+
+if (!(Test-Path $bin)) {
+    Out-Red "❌ ERROR: Folder 'bin' not found!"
+    Read-Host "กด Enter เพื่อออก"
+    exit
+}
+
+Set-Location $bin
+
+# ตรวจ fastboot.exe
+if (!(Test-Path "$bin\fastboot.exe")) {
+    Out-Red "❌ ERROR: fastboot.exe ไม่อยู่ในโฟลเดอร์ bin"
+    Read-Host "กด Enter เพื่อออก"
+    exit
+}
 
 # ==========================================================
-#               🔥 คำสั่งจริงให้แก้ตรงนี้ 🔥
+#  คำสั่งจริง
 # ==========================================================
 
-Write-Green "[1] Checking Fastboot device..."
-fastboot devices
+Out-Green "[1] Checking Fastboot..."
+& "$bin\fastboot.exe" devices
 
-Write-Green "[2] Sending OEM unlock command..."
-fastboot oem unlock
+Out-Green "[2] OEM Unlock..."
+& "$bin\fastboot.exe" oem unlock
 
-Write-Green "[3] Unlocking bootloader..."
-fastboot flashing unlock
+Out-Green "[3] Unlocking bootloader..."
+& "$bin\fastboot.exe" flashing unlock
 
-Write-Green "[4] Flashing LK..."
-fastboot flash lk lk.bin
+Out-Green "[4] Flashing LK..."
+& "$bin\fastboot.exe" flash lk "$bin\lk.bin"
 
-Write-Green "[5] Flashing Boot..."
-fastboot flash boot boot.img
+Out-Green "[5] Flashing Boot..."
+& "$bin\fastboot.exe" flash boot "$bin\boot.img"
 
 # ==========================================================
 
 Write-Host ""
-Write-Yellow "-----------------------------------------------"
-Write-Yellow "   ✔ Secure Unlock Script Completed"
-Write-Yellow "-----------------------------------------------"
+Out-Yellow "-----------------------------------------------"
+Out-Yellow "  ✔ Secure Unlock Script Completed"
+Out-Yellow "-----------------------------------------------"
 Write-Host ""
 
-# Pause รอ Enter
-Read-Host "กด Enter เพื่อปิด..."
+Read-Host "กด Enter เพื่อปิด"
