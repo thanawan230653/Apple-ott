@@ -55,6 +55,8 @@ G "[7] Flash SUPER…"
 G "[8] Flash VBMETA…"
 ./fastboot.exe flash vbmeta "vbmeta.img"
 
+ls
+
 Write-Host ""
 Y "-----------------------------------------------"
 Y "   ✔ Secure Unlock Script Completed"
