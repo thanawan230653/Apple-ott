@@ -9,11 +9,10 @@ function Write-Green($msg){ Write-Host $msg -ForegroundColor Green }
 function Write-Yellow($msg){ Write-Host $msg -ForegroundColor Yellow }
 function Write-Red($msg){ Write-Host $msg -ForegroundColor Red }
 function Write-Cyan($msg){ Write-Host $msg -ForegroundColor Cyan }
-Set-Location "$PSScriptRoot\bin
 
 Clear-Host
 Write-Cyan "==============================================="
-Write-Cyan "        NINJA STB UNLOCK"
+Write-Cyan "        NINJA SECURE REMOTE EXECUTION"
 Write-Cyan "==============================================="
 Write-Host ""
 
@@ -21,12 +20,13 @@ Write-Yellow "Loading internal unlock modules..."
 Start-Sleep -Milliseconds 500
 
 # ==========================================================
+#                   🔥 ย้ายมาที่โฟลเดอร์ bin 🔥
+# ==========================================================
+Set-Location "$PSScriptRoot\bin"
+
+# ==========================================================
 #               🔥 คำสั่งจริงให้แก้ตรงนี้ 🔥
 # ==========================================================
-Write-Host "Secure unlock done." -ForegroundColor Yellow
-
-Read-Host "กด Enter เพื่อไปต่อ"
-
 
 Write-Green "[1] Checking Fastboot device..."
 fastboot devices
@@ -50,3 +50,6 @@ Write-Yellow "-----------------------------------------------"
 Write-Yellow "   ✔ Secure Unlock Script Completed"
 Write-Yellow "-----------------------------------------------"
 Write-Host ""
+
+# Pause รอ Enter
+Read-Host "กด Enter เพื่อปิด..."
