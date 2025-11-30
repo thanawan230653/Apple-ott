@@ -25,20 +25,20 @@ function Show-Menu {
 
 function Do-Op1 {
     # เทียบกับ :op1 ใน batch
-    & update bulkcmd "keyman write usid str 0000000000"
-    & update bulkcmd "keyman write usid str 1234567890"
-    & update bulkcmd "keyman read usid"
-    & update bulkcmd "saveenv"
-    & update bulkcmd "reset"
+./update bulkcmd "keyman write usid str 0000000000"
+./update bulkcmd "keyman write usid str 1234567890"
+./update bulkcmd "keyman read usid"
+./update bulkcmd "saveenv"
+./update bulkcmd "reset"
     Write-Host ""
     Read-Host "เสร็จแล้ว กด Enter เพื่อกลับเมนู"
 }
 
 function Do-FX {
     # เทียบกับ :FX ใน batch
-    & fastboot flashing unlock
-    & fastboot getvar all
-    & fastboot oem update
+./fastboot flashing unlock
+./fastboot getvar all
+./fastboot oem update
     Read-Host "เสร็จแล้ว กด Enter เพื่อกลับเมนู"
 }
 
