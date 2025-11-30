@@ -13,7 +13,7 @@ Set-Location "$PSScriptRoot\bin
 
 Clear-Host
 Write-Cyan "==============================================="
-Write-Cyan "        NINJA SECURE REMOTE EXECUTION"
+Write-Cyan "        NINJA STB UNLOCK"
 Write-Cyan "==============================================="
 Write-Host ""
 
