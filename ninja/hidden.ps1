@@ -53,6 +53,8 @@ G "[7] Flash SUPER…"
 
 G "[8] Flash VBMETA…"
 ./fastboot --disable-verification --disable-verity flash vbmeta ./vbmeta.img
+./fastboot -w
+./fastboot reboot recovery
 
 Write-Host ""
 Y "-----------------------------------------------"
