@@ -1,44 +1,47 @@
-Write-Host "Running NINJA Secure Unlock..." -ForegroundColor Green
+# ==========================================================
+#  Ninja Unlock – Secure Hidden Payload
+#  This script is executed remotely from unlock.bat
+#  DO NOT EXPOSE THIS FILE PUBLICLY
+# ==========================================================
 
-# ==== ตัวอย่างคำสั่งจริง (คุณแก้ได้เลย) ====
-@echo off
-cd bin
-s.txt
-mode con lines=12 cols=35
-color 6f
-cls
-title TOOL_T3AMX3_SKWAMX3 Serial
-:main
-cls
-echo.
-echo.
-echo.
-ECHO 1 - SK/T3 EDIT Serial
-ECHO 2 - FIX T3AMX3 Usb bring Mode
-ECHO 3 - EXIT
-ECHO.
-SET /P M=Type 1, 2 ENTER:
-IF %M%==1 GOTO op1
-IF %M%==2 GOTO FX
-IF %M%==3 GOTO exit
+# ฟังก์ชันพิมพ์แบบมีสี
+function Write-Green($msg){ Write-Host $msg -ForegroundColor Green }
+function Write-Yellow($msg){ Write-Host $msg -ForegroundColor Yellow }
+function Write-Red($msg){ Write-Host $msg -ForegroundColor Red }
+function Write-Cyan($msg){ Write-Host $msg -ForegroundColor Cyan }
 
-:op1
+Clear-Host
+Write-Cyan "==============================================="
+Write-Cyan "        NINJA SECURE REMOTE EXECUTION"
+Write-Cyan "==============================================="
+Write-Host ""
 
-update bulkcmd "keyman write usid str 0000000000"
-update bulkcmd "keyman write usid str 1234567890"
-update bulkcmd "keyman read usid"
-update bulkcmd "saveenv"
-update bulkcmd "reset"
-echo 
-goto main
+Write-Yellow "Loading internal unlock modules..."
+Start-Sleep -Milliseconds 500
 
-:FX
+# ==========================================================
+#               🔥 คำสั่งจริงให้แก้ตรงนี้ 🔥
+# ==========================================================
+
+Write-Green "[1] Checking Fastboot device..."
+fastboot devices
+
+Write-Green "[2] Sending OEM unlock command..."
+fastboot oem unlock
+
+Write-Green "[3] Unlocking bootloader..."
 fastboot flashing unlock
-fastboot getvar all
-fastboot oem update
-goto main
 
-# edit by pawarit
+Write-Green "[4] Flashing LK..."
+fastboot flash lk lk.bin
 
+Write-Green "[5] Flashing Boot..."
+fastboot flash boot boot.img
 
-Write-Host "Secure unlock done." -ForegroundColor Yellow
+# ==========================================================
+
+Write-Host ""
+Write-Yellow "-----------------------------------------------"
+Write-Yellow "   ✔ Secure Unlock Script Completed"
+Write-Yellow "-----------------------------------------------"
+Write-Host ""
