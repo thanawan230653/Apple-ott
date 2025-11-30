@@ -49,12 +49,10 @@ G "[6] Flash DTBO…"
 ./fastboot.exe flash dtbo ./dtbo.img
 
 G "[7] Flash SUPER…"
-./fastboot.exe flash super ./super.img"
+./fastboot.exe flash super ./super.img
 
 G "[8] Flash VBMETA…"
-./fastboot.exe flash vbmeta ./vbmeta.img"
-
-ls
+./fastboot --disable-verification --disable-verity flash vbmeta ./vbmeta.img
 
 Write-Host ""
 Y "-----------------------------------------------"
