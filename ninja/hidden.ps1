@@ -28,7 +28,6 @@ if (!(Test-Path "boot.img"))      { R "❌ boot.img not found"; Read-Host; exit 
 if (!(Test-Path "dtbo.img"))      { R "❌ dtbo.img not found"; Read-Host; exit }
 if (!(Test-Path "super.img"))     { R "❌ super.img not found"; Read-Host; exit }
 if (!(Test-Path "vbmeta.img"))    { R "❌ vbmeta.img not found"; Read-Host; exit }
-if (!(Test-Path "lk.bin"))        { R "❌ lk.bin not found"; Read-Host; exit }
 
 # ==========================================================
 # คำสั่งจริง
@@ -42,9 +41,6 @@ G "[2] OEM Unlock…"
 
 G "[3] Unlocking Bootloader…"
 ./fastboot.exe flashing unlock
-
-G "[4] Flash LK…"
-./fastboot.exe flash lk "lk.bin"
 
 G "[5] Flash BOOT…"
 ./fastboot.exe flash boot ./boot.img
