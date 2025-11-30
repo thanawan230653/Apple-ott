@@ -1,74 +1,54 @@
-# ==========================================================
-#  Ninja Unlock – Secure Hidden Payload
-# ==========================================================
-
-# ปลดบล็อก PS Script
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 
-# ฟังก์ชันพิมพ์สี
-function Out-Green($m){Write-Host $m -ForegroundColor Green}
-function Out-Yellow($m){Write-Host $m -ForegroundColor Yellow}
-function Out-Red($m){Write-Host $m -ForegroundColor Red}
-function Out-Cyan($m){Write-Host $m -ForegroundColor Cyan}
+function G($m){Write-Host $m -ForegroundColor Green}
+function Y($m){Write-Host $m -ForegroundColor Yellow}
+function R($m){Write-Host $m -ForegroundColor Red}
+function C($m){Write-Host $m -ForegroundColor Cyan}
 
 Clear-Host
-Out-Cyan "==============================================="
-Out-Cyan "        NINJA SECURE REMOTE EXECUTION"
-Out-Cyan "==============================================="
+C "==============================================="
+C "        NINJA SECURE REMOTE EXECUTION"
+C "==============================================="
 Write-Host ""
 
-Out-Yellow "Loading modules..."
+Y "Loading modules..."
 Start-Sleep -Milliseconds 300
 
-# ==========================================================
-#  ย้ายไป bin แบบปลอดภัย
-# ==========================================================
 $bin = "$PSScriptRoot\bin"
-
-if (!(Test-Path $bin)) {
-    Out-Red "❌ ERROR: Folder 'bin' not found!"
-    Read-Host "กด Enter เพื่อออก"
-    exit
-}
-
+if (!(Test-Path $bin)) { R "❌ bin folder missing!"; Read-Host; exit }
 Set-Location $bin
 
-# ตรวจ fastboot.exe
-if (!(Test-Path "$bin\fastboot.exe")) {
-    Out-Red "❌ ERROR: fastboot.exe ไม่อยู่ในโฟลเดอร์ bin"
-    Read-Host "กด Enter เพื่อออก"
-    exit
-}
+$fb = "$bin\fastboot.exe"
+if (!(Test-Path $fb)) { R "❌ fastboot.exe missing"; Read-Host; exit }
 
-# ==========================================================
-#  คำสั่งจริง
-# ==========================================================
+G "[1] Fastboot devices"
+& $fb devices
 
-Out-Green "[1] Checking Fastboot..."
-& "$bin\fastboot.exe" devices
+G "[2] OEM Unlock"
+& $fb oem unlock
 
-Out-Green "[2] OEM Unlock..."
-& "$bin\fastboot.exe" grtvar unlockig
+G "[3] Unlocking bootloader"
+& $fb flashing unlock
 
-& "$bin\fastboot.exe" flash boot "$bin\boot.img"
-& "$bin\fastboot.exe" flash dtbo "$bin\dtbo.img"
-& "$bin\fastboot.exe" flash super "$bin\super.img"
-& "$bin\fastboot.exe" flash vbmeta "$bin\vbmeta.img"
+G "[4] Flash LK"
+& $fb flash lk "$bin\lk.bin"
 
+G "[5] Flash BOOT"
+& $fb flash boot "$bin\boot.img"
 
-Out-Green "[8] Clk"
-& "$bin\fastboot -w
+G "[6] Flash DTBO"
+& $fb flash dtbo "$bin\dtbo.img"
 
-Out-Green "[9] reboot system"
-& "$bin\fastboot reboot
+G "[7] Flash SUPER"
+& $fb flash super "$bin\super.img"
 
-
-# ==========================================================
+G "[8] Flash VBMETA"
+& $fb flash vbmeta "$bin\vbmeta.img"
 
 Write-Host ""
-Out-Yellow "-----------------------------------------------"
-Out-Yellow "  ✔ Secure Unlock Script Completed"
-Out-Yellow "-----------------------------------------------"
+Y "-----------------------------------------------"
+Y "   ✔ Secure Unlock Script Completed"
+Y "-----------------------------------------------"
 Write-Host ""
 
-Read-Host "กด Enter เพื่อปิด"
+Read-Host "Press ENTER to close"
