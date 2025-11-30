@@ -44,16 +44,16 @@ G "[3] Unlocking Bootloader…"
 ./fastboot.exe flashing unlock
 
 G "[5] Flash BOOT…"
-./fastboot.exe flash boot boot.img
+./fastboot.exe flash boot ./boot.img
 
 G "[6] Flash DTBO…"
-./fastboot.exe flash dtbo "dtbo.img"
+./fastboot.exe flash dtbo ./dtbo.img
 
 G "[7] Flash SUPER…"
-./fastboot.exe flash super "super.img"
+./fastboot.exe flash super ./super.img"
 
 G "[8] Flash VBMETA…"
-./fastboot.exe flash vbmeta "vbmeta.img"
+./fastboot.exe flash vbmeta ./vbmeta.img"
 
 ls
 
