@@ -51,13 +51,13 @@ Out-Green "[2] OEM Unlock..."
 & "$bin\fastboot.exe" getvar all
 
 Out-Green "[3] FLASH BOOT"
-& "$bin\fastboot.exe" flashing boot "$bin\boot.img"
+& "$bin\fastboot.exe" flash boot "$bin\boot.img"
 
 Out-Green "[4] FLASH dtbo"
-& "$bin\fastboot.exe" flashing dtbo "$bin\dtbo.img"
+& "$bin\fastboot.exe" flash dtbo "$bin\dtbo.img"
 
 Out-Green "[5] FLASH super"
-& "$bin\fastboot.exe" flashing super "$bin\super.img"
+& "$bin\fastboot.exe" flash super "$bin\super.img"
 
 Out-Green "[6] FLASH vbmata"
 & "$bin\fastboot --disable-verification --disable-verity flash vbmeta "$bin\vbmeta.img"
