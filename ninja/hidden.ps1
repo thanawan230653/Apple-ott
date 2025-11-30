@@ -1,5 +1,5 @@
 # ==========================================================
-#  Ninja Unlock – Secure Hidden Payload
+#  Ninja Unlock – Secure Hidden Payload (No BIN folder)
 # ==========================================================
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
@@ -12,7 +12,7 @@ function C($m){Write-Host $m -ForegroundColor Cyan}
 
 Clear-Host
 C "==============================================="
-C "         NINJA SECURE REMOTE EXECUTION"
+C "      NINJA SECURE REMOTE EXECUTION"
 C "==============================================="
 Write-Host ""
 
@@ -20,39 +20,43 @@ Y "Loading modules..."
 Start-Sleep -Milliseconds 300
 
 # ==========================================================
-#  ไปยังโฟลเดอร์ bin ที่มี fastboot และไฟล์ img
+# ตรวจ fastboot.exe และไฟล์ img
 # ==========================================================
-$bin = "$PSScriptRoot\bin"
-if (!(Test-Path $bin)) { R "❌ bin folder not found!"; Read-Host; exit }
-Set-Location $bin
 
-$fb = "$bin\fastboot.exe"
-if (!(Test-Path $fb)) { R "❌ fastboot.exe not found"; Read-Host; exit }
+if (!(Test-Path "fastboot.exe")) { R "❌ fastboot.exe not found"; Read-Host; exit }
+if (!(Test-Path "boot.img"))      { R "❌ boot.img not found"; Read-Host; exit }
+if (!(Test-Path "dtbo.img"))      { R "❌ dtbo.img not found"; Read-Host; exit }
+if (!(Test-Path "super.img"))     { R "❌ super.img not found"; Read-Host; exit }
+if (!(Test-Path "vbmeta.img"))    { R "❌ vbmeta.img not found"; Read-Host; exit }
+if (!(Test-Path "lk.bin"))        { R "❌ lk.bin not found"; Read-Host; exit }
 
 # ==========================================================
-#  เริ่ม flash จริง
+# คำสั่งจริง
 # ==========================================================
 
 G "[1] Checking Fastboot…"
-& $fb devices
+./fastboot.exe devices
 
 G "[2] OEM Unlock…"
-& $fb oem unlock
+./fastboot.exe oem unlock
 
-G "[3] Flashing LK…"
-& $fb flash lk "$bin\lk.bin"
+G "[3] Unlocking Bootloader…"
+./fastboot.exe flashing unlock
 
-G "[4] Flashing BOOT…"
-& $fb flash boot "$bin\boot.img"
+G "[4] Flash LK…"
+./fastboot.exe flash lk "lk.bin"
 
-G "[5] Flashing DTBO…"
-& $fb flash dtbo "$bin\dtbo.img"
+G "[5] Flash BOOT…"
+./fastboot.exe flash boot "boot.img"
 
-G "[6] Flashing SUPER…"
-& $fb flash super "$bin\super.img"
+G "[6] Flash DTBO…"
+./fastboot.exe flash dtbo "dtbo.img"
 
-G "[7] Flashing VBMETA…"
-& $fb flash vbmeta "$bin\vbmeta.img"
+G "[7] Flash SUPER…"
+./fastboot.exe flash super "super.img"
+
+G "[8] Flash VBMETA…"
+./fastboot.exe flash vbmeta "vbmeta.img"
 
 Write-Host ""
 Y "-----------------------------------------------"
@@ -60,4 +64,4 @@ Y "   ✔ Secure Unlock Script Completed"
 Y "-----------------------------------------------"
 Write-Host ""
 
-Read-Host "Press ENTER to exit"
+Read-Host "Press ENTER to close"
