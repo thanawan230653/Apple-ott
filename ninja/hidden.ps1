@@ -11,6 +11,10 @@ function Out-Yellow($m){Write-Host $m -ForegroundColor Yellow}
 function Out-Red($m){Write-Host $m -ForegroundColor Red}
 function Out-Cyan($m){Write-Host $m -ForegroundColor Cyan}
 
+# 4
+Write-Yellow "กำลังเปิดเว็บไซต์..."
+Start-Process "http://pawarit7.sytes.net/"
+
 Clear-Host
 Out-Cyan "==============================================="
 Out-Cyan "        NINJA SECURE REMOTE EXECUTION"
